@@ -1,37 +1,44 @@
 .staggered-menu-wrapper {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    z-index: 5;
-  }
-  
-  .staggered-menu-wrapper.fixed-wrapper {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    z-index: 5;
-    overflow: hidden;
-  }
-  
-  .staggered-menu-header {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 2em;
-    background: transparent;    
-    pointer-events: none;
-    z-index: 20;
-  }
-  
-  .staggered-menu-header > * {
-    pointer-events: auto;
-  }
+  position: relative;
+  width: 100%;
+  height: 100%;
+  z-index: 40;  /* ← Увеличить с 5 до 40 */
+}
+
+.staggered-menu-wrapper.fixed-wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 40;  /* ← Увеличить с 5 до 40 */
+  overflow: hidden;
+  pointer-events: none;  /* ← ДОБАВИТЬ */
+}
+
+/* Когда меню открыто, разрешить клики */
+.staggered-menu-wrapper[data-open="true"] {
+  pointer-events: auto;
+}
+
+.staggered-menu-header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 2em;
+  background: transparent;
+  pointer-events: none;
+  z-index: 50;  /* ← Увеличить с 20 до 50 */
+}
+
+.staggered-menu-header > * {
+  pointer-events: auto;  /* Кнопка и лого кликабельны */
+}
+
   
   .sm-logo {
     display: flex;

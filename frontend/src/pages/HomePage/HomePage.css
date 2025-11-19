@@ -17,9 +17,8 @@
 /* Контент поверх фона */
 .content-overlay {
   position: relative;
-  z-index: 1;
+  z-index: 1;  /* ← УБРАТЬ дубликат z-index: 5 */
   min-height: 100vh;
-  z-index: 5;
 }
 
 .hero-section {
@@ -30,7 +29,7 @@
   justify-content: center;
   padding: 2rem;
   color: white;
-  z-index: 6;
+  /* УБРАТЬ z-index: 6 */
 }
 
 .hero-content {
@@ -38,8 +37,9 @@
   text-align: center;
   margin-bottom: 4rem;
   position: relative;
-  z-index: 2;
+  /* УБРАТЬ z-index: 2 */
 }
+
 
 /* Logo */
 .logo {

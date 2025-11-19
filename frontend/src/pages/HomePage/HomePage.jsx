@@ -41,7 +41,7 @@ function HomePage() {
         <LetterGlitch
           glitchSpeed={50}
           centerVignette={true}
-          outerVignette={false}
+          outerVignette={true}
           smooth={true}
           glitchColors={['#2b4539', '#61dca3', '#61b3dc']}
         />
