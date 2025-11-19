@@ -1,0 +1,229 @@
+/* === SIDEBAR === */
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    max-width: 320px;
+    background: linear-gradient(180deg, #667eea 0%, #764ba2 100%);
+    transform: translateX(-100%);
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 999;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 4px 0 20px rgba(0, 0, 0, 0.3);
+    overflow-y: auto;
+  }
+  
+  .sidebar.open {
+    transform: translateX(0);
+  }
+  
+  /* === ПРОФИЛЬ ПОЛЬЗОВАТЕЛЯ === */
+  .sidebar-profile {
+    padding: 2rem 1.5rem;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  }
+  
+  .profile-avatar {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 1rem;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 3px solid rgba(255, 255, 255, 0.3);
+  }
+  
+  .profile-avatar img,
+  .avatar-placeholder-large {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  .avatar-placeholder-large {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    font-size: 2rem;
+    font-weight: 700;
+  }
+  
+  .profile-info {
+    text-align: center;
+    color: white;
+  }
+  
+  .profile-info h3 {
+    margin: 0 0 0.25rem;
+    font-size: 1.25rem;
+    font-weight: 600;
+  }
+  
+  .profile-info .username {
+    margin: 0;
+    opacity: 0.8;
+    font-size: 0.9rem;
+  }
+  
+  /* === НАВИГАЦИЯ === */
+  .sidebar-nav {
+    flex: 1;
+    padding: 1rem 0;
+    overflow-y: auto;
+  }
+  
+  .nav-item {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem 1.5rem;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    position: relative;
+    text-align: left;
+    border-left: 3px solid transparent;
+  }
+  
+  .nav-item:hover {
+    background: rgba(255, 255, 255, 0.1);
+  }
+  
+  .nav-item:active {
+    transform: scale(0.98);
+  }
+  
+  .nav-item.active {
+    background: rgba(255, 255, 255, 0.15);
+    border-left-color: var(--item-color, white);
+    font-weight: 600;
+  }
+  
+  .nav-icon {
+    font-size: 1.5rem;
+    flex-shrink: 0;
+  }
+  
+  .nav-text {
+    flex: 1;
+  }
+  
+  .nav-indicator {
+    position: absolute;
+    right: 1rem;
+    width: 8px;
+    height: 8px;
+    background: white;
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+  }
+  
+  @keyframes pulse {
+    0%, 100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+    50% {
+      opacity: 0.5;
+      transform: scale(1.2);
+    }
+  }
+  
+  /* === ФУТЕР SIDEBAR === */
+  .sidebar-footer {
+    padding: 1.5rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    background: rgba(0, 0, 0, 0.2);
+  }
+  
+  .logout-button {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    padding: 0.75rem;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 8px;
+    color: white;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    margin-bottom: 1rem;
+  }
+  
+  .logout-button:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px);
+  }
+  
+  .logout-button:active {
+    transform: translateY(0);
+  }
+  
+  .logout-icon {
+    font-size: 1.25rem;
+  }
+  
+  .app-version {
+    text-align: center;
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.8rem;
+  }
+  
+  .app-version p {
+    margin: 0.25rem 0;
+  }
+  
+  .version-text {
+    font-size: 0.7rem;
+    opacity: 0.6;
+  }
+  
+  /* === АДАПТАЦИЯ === */
+  @media (max-width: 768px) {
+    .sidebar {
+      max-width: 85%;
+    }
+  }
+  
+  @media (min-width: 769px) {
+    .sidebar {
+      max-width: 300px;
+    }
+  }
+  
+  /* Плавная прокрутка */
+  .sidebar-nav {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255, 255, 255, 0.3) transparent;
+  }
+  
+  .sidebar-nav::-webkit-scrollbar {
+    width: 6px;
+  }
+  
+  .sidebar-nav::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  
+  .sidebar-nav::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 3px;
+  }
+  
+  .sidebar-nav::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.5);
+  }
+  

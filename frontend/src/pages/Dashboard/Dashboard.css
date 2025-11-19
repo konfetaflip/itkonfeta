@@ -1,0 +1,37 @@
+.welcome-section {
+  text-align: center;
+  margin-bottom: 3rem;
+  padding: 2rem;
+  z-index: 1;
+}
+
+.welcome-section h2 {
+  margin-bottom: 0.5rem;
+  font-size: 2rem;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+  color: #61dca3;
+  z-index: 1;
+}
+
+.logout-section {
+  text-align: center;
+  margin-top: 3rem;
+}
+
+.logout-button {
+  background: rgba(97, 220, 163, 0.2);
+  border: 2px solid #61dca3;
+  color: #61dca3;
+  padding: 1rem 2rem;
+  font-size: 1rem;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-weight: 600;
+}
+
+.logout-button:hover {
+  background: #61dca3;
+  color: #000;
+  transform: translateY(-2px);
+}

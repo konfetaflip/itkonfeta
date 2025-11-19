@@ -1,0 +1,16 @@
+.telegram-auth {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .telegram-widget-container {
+    display: flex;
+    justify-content: center;
+  }
+  
+  /* Стилизация кнопки Telegram (если нужно) */
+  .telegram-auth iframe {
+    border-radius: 8px;
+  }
+  
