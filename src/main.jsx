@@ -1,7 +1,40 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import App from './App';
+import App from './App.jsx';
 import './index.css';
+
+// ===== ДОБАВИТЬ ЭТО =====
+// Функция для установки реальной высоты viewport
+function setVhProperty() {
+  // Получаем реальную высоту viewport
+  const vh = window.innerHeight * 0.01;
+  // Устанавливаем CSS переменную --vh
+  document.documentElement.style.setProperty('--vh', `${vh}px`);
+}
+
+// Устанавливаем при загрузке
+setVhProperty();
+
+// Обновляем при изменении размера окна
+window.addEventListener('resize', setVhProperty);
+
+// Обновляем при изменении ориентации
+window.addEventListener('orientationchange', () => {
+  setTimeout(setVhProperty, 100);
+});
+
+// Для iOS Safari - обновляем при скролле (когда прячется адресная строка)
+let ticking = false;
+window.addEventListener('scroll', () => {
+  if (!ticking) {
+    window.requestAnimationFrame(() => {
+      setVhProperty();
+      ticking = false;
+    });
+    ticking = true;
+  }
+});
+// ===== КОНЕЦ ДОБАВЛЕНИЯ =====
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>

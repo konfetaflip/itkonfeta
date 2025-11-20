@@ -29,19 +29,6 @@
     background: #000;
   }
   
-  .spinner {
-    width: 50px;
-    height: 50px;
-    border: 3px solid rgba(97, 220, 163, 0.3);
-    border-top-color: #61dca3;
-    border-radius: 50%;
-    animation: spin 0.8s linear infinite;
-  }
-  
-  @keyframes spin {
-    to { transform: rotate(360deg); }
-  }
-  
   @media (max-width: 768px) {
     .content-overlay {
       padding: 1rem;

@@ -11,9 +11,14 @@
   left: 0;
   width: 100vw;
   height: 100vh;
-  z-index: 40;  /* ← Увеличить с 5 до 40 */
+  height: 100dvh;  /* Для современных браузеров */
+  z-index: 40;
   overflow: hidden;
-  pointer-events: none;  /* ← ДОБАВИТЬ */
+  pointer-events: none;
+  
+  /* ДОБАВИТЬ - запрет прокрутки */
+  overscroll-behavior: none;
+  -webkit-overflow-scrolling: auto;
 }
 
 /* Когда меню открыто, разрешить клики */
@@ -22,21 +27,22 @@
 }
 
 .staggered-menu-header {
-  position: absolute;
+  position: fixed;  /* ИЗМЕНИТЬ с absolute на fixed */
   top: 0;
   left: 0;
   width: 100%;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 2em;
+  padding: 1em;
   background: transparent;
   pointer-events: none;
-  z-index: 50;  /* ← Увеличить с 20 до 50 */
+  z-index: 50;  /* УВЕЛИЧИТЬ с 20 до 50 */
 }
 
+
 .staggered-menu-header > * {
-  pointer-events: auto;  /* Кнопка и лого кликабельны */
+  pointer-events: all;  /* Кнопка и лого кликабельны */
 }
 
   
@@ -136,11 +142,12 @@
   }
   
   .staggered-menu-panel {
-    position: absolute;
+    position: fixed;  /* ИЗМЕНИТЬ с absolute на fixed */
     top: 0;
     right: 0;
     width: clamp(260px, 38vw, 420px);
-    height: 100%;
+    height: 100vh;
+    height: 100dvh;  /* Для современных браузеров */
     background: white;
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
@@ -148,23 +155,85 @@
     flex-direction: column;
     padding: 6em 2em 2em 2em;
     overflow-y: auto;
+    overflow-x: hidden;
     z-index: 10;
+    -webkit-overflow-scrolling: touch;
+    
+    /* ДОБАВИТЬ - предотвращаем прокрутку за пределы */
+    overscroll-behavior: contain;
   }
+  
+.staggered-menu-panel::-webkit-scrollbar {
+  width: 6px;
+}
+.staggered-menu-panel::-webkit-scrollbar-track {
+  background: transparent;
+  margin: 6em 0 1em 0;  /* Отступы сверху и снизу */
+}
+.staggered-menu-panel::-webkit-scrollbar-thumb {
+  background: rgba(97, 220, 163, 0.3);
+  border-radius: 3px;
+}
+
+.staggered-menu-panel::-webkit-scrollbar-thumb:hover {
+  background: rgba(97, 220, 163, 0.5);
+}
   
   [data-position='left'] .staggered-menu-panel {
     right: auto;
     left: 0;
   }
+  .scroll-indicator {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem;
+    color: rgba(0, 0, 0, 0.3);
+    font-size: 0.8rem;
+    animation: bounce 2s infinite;
+    margin-top: auto;
+    margin-bottom: -1rem;
+  }
+  
+  .scroll-indicator span:first-child {
+    font-size: 1.5rem;
+  }
+  
+  .scroll-text {
+    font-size: 0.75rem;
+  }
+  
+  @keyframes bounce {
+    0%, 100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(10px);
+    }
+  }
+  
+  /* Скрываем индикатор на десктопе */
+  @media (min-width: 1025px) {
+    .scroll-indicator {
+      display: none;
+    }
+  }
+  
   
   .sm-prelayers {
-    position: absolute;
+    position: fixed;  /* ИЗМЕНИТЬ с absolute на fixed */
     top: 0;
     right: 0;
     bottom: 0;
     width: clamp(260px, 38vw, 420px);
+    height: 100vh;
+    height: 100dvh;
     pointer-events: none;
     z-index: 5;
+    overscroll-behavior: none;
   }
+  
   
   [data-position='left'] .sm-prelayers {
     right: auto;
@@ -185,7 +254,10 @@
     display: flex;
     flex-direction: column;
     gap: 1.25rem;
+    min-height: 0;  /* ← ДОБАВИТЬ - важно для flex */
+    overflow-y: visible;  /* ← ДОБАВИТЬ */
   }
+  
   
   .sm-socials {
     margin-top: auto;
@@ -326,8 +398,8 @@
     content: counter(smItem, decimal-leading-zero);
     position: absolute;
     top: 0.1em;
-    right: 2.8em;
-    font-size: 18px;
+    right: 4em;
+    font-size: 15px;
     font-weight: 400;
     color: var(--sm-accent, #5227ff);
     letter-spacing: 0;
@@ -336,37 +408,41 @@
     opacity: var(--sm-num-opacity, 0);
   }
   
-  @media (max-width: 1024px) {
-    .staggered-menu-panel {
-      width: 100%;
-      left: 0;
-      right: 0;
-    }
-  
-    .staggered-menu-wrapper[data-open] .sm-logo-img {
-      filter: invert(100%);
-    }
+  /* Для мобильных устройств */
+@media (max-width: 1024px) {
+  .staggered-menu-panel {
+    width: 100%;
+    left: 0;
+    right: 0;
+    padding: 5em 1.5em 1.5em 1.5em;  /* ← Уменьшить отступы */
+    max-height: calc(var(--vh, 1vh) * 100);
   }
-  
-  @media (max-width: 640px) {
-    .staggered-menu-panel {
-      width: 100%;
-      left: 0;
-      right: 0;
-    }
-  
-    .staggered-menu-wrapper[data-open] .sm-logo-img {
-      filter: invert(100%);
-    }
+
+  .staggered-menu-wrapper[data-open] .sm-logo-img {
+    filter: invert(100%);
   }
+}
+  
+@media (max-width: 640px) {
+  .staggered-menu-panel {
+    width: 100%;
+    left: 0;
+    right: 0;
+    padding: 4.5em 1rem 1rem 1rem;  /* ← Еще меньше отступы */
+  }
+
+  .staggered-menu-wrapper[data-open] .sm-logo-img {
+    filter: invert(100%);
+  }
+}
   /* Аватарка в хедере */
 .user-avatar-header {
   width: 40px;
   height: 40px;
   border-radius: 50%;
   overflow: hidden;
-  border: 2px solid #61dca3;
-  box-shadow: 0 0 15px rgba(97, 220, 163, 0.5);
+  border: 2px solid #9370db;
+  box-shadow: 0 0 15px #9370db;
 }
 
 .user-avatar-header img,
@@ -389,6 +465,7 @@
   border: none;
   text-align: left;
   width: 100%;
+  left: 2em;
 }
 
 .sm-panel-item.active {
@@ -397,17 +474,23 @@
 
 .sm-panel-item.active::before {
   content: '→';
+  top: -0.2em;
   position: absolute;
-  left: -0.5em;
+  left: -1.2em;
   color: var(--sm-accent, #61dca3);
+  font-weight: 800;
 }
 
 /* Секция авторизации */
 .sm-auth-section {
+  position: sticky;
+  bottom: 0;
+  background: white;
   margin-top: auto;
-  padding-top: 2rem;
+  padding: 1.5rem 0 0;
   border-top: 1px solid rgba(97, 220, 163, 0.2);
 }
+
 
 .sm-auth-title {
   margin: 0 0 1rem;
@@ -432,8 +515,8 @@
 /* Секция пользователя */
 .sm-user-section {
   margin-top: auto;
-  padding-top: 2rem;
-  border-top: 1px solid rgba(97, 220, 163, 0.2);
+  padding-top: 1.5rem;
+  border-top: 0.1px solid #9370db;
   display: flex;
   flex-direction: column;
   gap: 1rem;
@@ -450,7 +533,7 @@
   height: 60px;
   border-radius: 50%;
   overflow: hidden;
-  border: 2px solid #61dca3;
+  border: 2px solid #9370db;
   flex-shrink: 0;
 }
 
@@ -462,7 +545,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(135deg, #2b4539, #61dca3);
+  background: linear-gradient(135deg, #9370db, #503d77);
   color: white;
   font-weight: 700;
   font-size: 1.8rem;
@@ -478,6 +561,7 @@
   margin: 0.25rem 0 0;
   font-size: 0.9rem;
   color: #666;
+  text-align: left;
 }
 
 .logout-button {
@@ -487,18 +571,18 @@
   gap: 0.5rem;
   width: 100%;
   padding: 0.75rem;
-  background: rgba(97, 220, 163, 0.1);
-  border: 1px solid var(--sm-accent, #61dca3);
+  background: #9370db;
+  border: 1px solid var(--sm-accent, #9370db);
   border-radius: 8px;
   color: #000;
   font-size: 1rem;
   font-weight: 500;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: all 0.5s ease;
 }
 
 .logout-button:hover {
-  background: var(--sm-accent, #61dca3);
+  background: var(--sm-accent, #9370db);
   color: white;
 }
 

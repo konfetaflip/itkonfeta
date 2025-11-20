@@ -81,7 +81,7 @@
     padding: 2rem;
     border-radius: 16px;
     margin-bottom: 1.5rem;
-    border: 1px solid rgba(97, 220, 163, 0.3);
+    border: 1px solid #9370db;
     animation: slideInLeft 0.5s ease-out;
     position: relative;
     overflow: hidden;

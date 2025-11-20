@@ -1,6 +1,7 @@
 import React, { useCallback, useLayoutEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
 import './StaggeredMenu.css';
+import TelegramAuth from '../TelegramAuth/TelegramAuth';
 import { TELEGRAM_CONFIG } from '../../config/telegram';
 
 
@@ -43,11 +44,6 @@ export const StaggeredMenu = ({
   const toggleBtnRef = useRef(null);
   const busyRef = useRef(false);
   const itemEntranceTweenRef = useRef(null);
-
-  const lettersAndSymbols = Array.from('ABCDEFGHIJKLMNOPQRSTUVWXYZ!@#$&*()-_+=/[]{};:<>.,0123456789');
-  const fontSize = 16;
-  const charWidth = 10;
-  const charHeight = 20;
 
   useLayoutEffect(() => {
     const ctx = gsap.context(() => {
@@ -302,13 +298,17 @@ export const StaggeredMenu = ({
     const target = !openRef.current;
     openRef.current = target;
     setOpen(target);
+    
     if (target) {
+      document.documentElement.style.overflow = 'hidden';
       onMenuOpen?.();
       playOpen();
     } else {
+      document.documentElement.style.overflow = '';
       onMenuClose?.();
       playClose();
     }
+    
     animateIcon(target);
     animateColor(target);
     animateText(target);

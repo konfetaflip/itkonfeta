@@ -25,10 +25,10 @@ function MainLayout({ children, user, onLogin, onLogout }) {
       <div className="background-container">
         <LetterGlitch
           glitchSpeed={50}
-          centerVignette={true}
+          centerVignette={false}
           outerVignette={true}
           smooth={true}
-          glitchColors={['#2b4539', '#61dca3', '#61b3dc']}
+          glitchColors={['#F266E9', '#762EA6', '#230A59']}
         />
       </div>
 
@@ -42,11 +42,11 @@ function MainLayout({ children, user, onLogin, onLogout }) {
         onMenuClick={handleMenuClick}
         currentPath={location.pathname}
         displayItemNumbering={true}
-        menuButtonColor="#61dca3"
+        menuButtonColor="#fff"
         openMenuButtonColor="#000"
         changeMenuColorOnOpen={true}
-        colors={['rgba(43, 69, 57, 0.95)', 'rgba(97, 220, 163, 0.95)']}
-        accentColor="#61dca3"
+        colors={['#8a2be2', '#9370db']}
+        accentColor='#9370db'
         isFixed={true}
       />
 

@@ -1,13 +1,13 @@
 import { useRef, useEffect } from 'react';
 
 const LetterGlitch = ({
-  glitchColors = ['#2b4539', '#61dca3', '#61b3dc'],
+  glitchColors = ['#F266E9', '#762EA6', '#230A59'],
   className = '',
   glitchSpeed = 50,
   centerVignette = true,
   outerVignette = true,
   smooth = true,
-  characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ!@#$&*()-_+=/[]{};:<>.,0123456789'
+  characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ!@#$&*()-_+=/[]{};:<>.,0123456789♥️'
 }) => {
   const canvasRef = useRef(null);
   const animationRef = useRef(null);
@@ -18,8 +18,8 @@ const LetterGlitch = ({
 
   const lettersAndSymbols = Array.from(characters);
 
-  const fontSize = 16;
-  const charWidth = 10;
+  const fontSize = 20;
+  const charWidth = 15;
   const charHeight = 20;
 
   const getRandomChar = () => {
@@ -199,11 +199,14 @@ const LetterGlitch = ({
   }, [glitchSpeed, smooth]);
 
   const containerStyle = {
-    position: 'relative',
+    position: 'fixed',
+    top: 0,
+    left: 0,
     width: '100%',
-    height: '100%',
+    height: '100vh',
     backgroundColor: '#000000',
-    overflow: 'hidden'
+    overflow: 'hidden',
+    zIndex: -1
   };
 
   const canvasStyle = {

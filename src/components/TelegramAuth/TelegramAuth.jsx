@@ -19,7 +19,6 @@ function TelegramAuth({ botName, onAuth }) {
     window.onTelegramAuth = (user) => {
       console.log('Telegram auth success:', user);
       
-      // Проверяем подпись (в продакшене это должно делаться на сервере!)
       if (user && user.id) {
         onAuth(user);
       }
@@ -39,7 +38,6 @@ function TelegramAuth({ botName, onAuth }) {
       containerRef.current.appendChild(script);
     }
 
-    // Cleanup
     return () => {
       window.onTelegramAuth = null;
       if (script.parentNode) {
