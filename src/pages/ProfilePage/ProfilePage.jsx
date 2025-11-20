@@ -80,22 +80,6 @@ function ProfilePage({ user }) {
         </div>
       </div>
 
-      {/* Quick Actions */}
-      <div className="quick-actions">
-        <button className="action-btn primary">
-          <span className="action-icon">⏰</span>
-          <span>Отметить приход</span>
-        </button>
-        <button className="action-btn">
-          <span className="action-icon">📦</span>
-          <span>Добавить товар</span>
-        </button>
-        <button className="action-btn">
-          <span className="action-icon">🎮</span>
-          <span>Играть</span>
-        </button>
-      </div>
-
       {/* Stats Grid */}
       <div className="stats-section">
         <h2>📊 Статистика</h2>
